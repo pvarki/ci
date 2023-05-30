@@ -1,0 +1,11 @@
+on:
+    pull_request:
+    push:
+      branches: [main]
+
+jobs:
+    main:
+      runs-on: ubuntu-latest
+      steps:
+      - name: action self-test
+        uses: ./

@@ -5,13 +5,11 @@ pvarki/ci
 
 A GitHub action to run [pvarki](https://github.com/pvarki) related and common ci steps.
 
-### using this action
+### Using this action
 
 To use this action, make a file `.github/workflows/main.yml`.  Here's a template to get started:
 
 ```yaml
-name: ci
-
 on:
   pull_request:
   push:

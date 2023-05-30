@@ -1,5 +1,4 @@
 name: ci
-description: run ci
 runs:
   using: composite
   steps:

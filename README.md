@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/pvarki/ci/workflows/main/badge.svg)](https://github.com/pvarki/ci/actions)
+![Build Status](https://github.com/pvarki/ci/actions/workflows/main.yml/badge.svg)
 
 pvarki/ci
 =========

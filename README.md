@@ -24,6 +24,8 @@ jobs:
 
 This does the following:
 
-- clones/checkout the code
-- installs python
+- clones/checkout the code (action)
+- installs python (action)
+- installs poetry (action)
+- installs mypy pylint detect-secrets (pip)
 - runs [pre-commit/action](https://github.com/pre-commit/action)

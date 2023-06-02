@@ -1,9 +1,8 @@
 on:
     pull_request:
+    push:
       branches-ignore:
         - main
-    push:
-
 jobs:
     ci:
       runs-on: ubuntu-latest

@@ -1,10 +1,16 @@
 name: ci
+inputs:
+  dockerfile-target:
+    description: 'Dockerfile target name'
+    required: true
+  image-tag:
+    description: 'Docker image tag name'
+    required: true
 runs:
   using: composite
   steps:
   - uses: actions/checkout@v3
-  - uses: actions/setup-python@v3
-  - uses: abatilo/actions-poetry@v2
-  - run: pip install mypy pylint detect-secrets
+  - run: docker build --target ${{inputs.dockerfile-target}} -t ${{inputs.image-tag}} .
     shell: bash
-  - uses: pre-commit/action@v3.0.0
+  - run: docker run --rm ${{inputs.image-tag}}
+    shell: bash

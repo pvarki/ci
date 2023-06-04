@@ -1,5 +1,9 @@
 name: ci
 inputs:
+  dockerfile-name:
+    description: 'Dockerfile name'
+    required: false
+    default: 'Dockerfile'
   dockerfile-target:
     description: 'Dockerfile target name'
     required: true
@@ -10,7 +14,7 @@ runs:
   using: composite
   steps:
   - uses: actions/checkout@v3
-  - run: eval "$(ssh-agent -s)" && export DOCKER_BUILDKIT=1 && docker build --ssh default --target ${{inputs.dockerfile-target}} -t ${{inputs.image-tag}} .
+  - run: eval "$(ssh-agent -s)" && export DOCKER_BUILDKIT=1 && docker build -f ${{inputs.dockerfile-name}} --ssh default --target ${{inputs.dockerfile-target}} -t ${{inputs.image-tag}} .
     shell: bash
   - run: docker run --rm -v ${{ github.workspace }}:/app -v $SSH_AUTH_SOCK:$SSH_AUTH_SOCK -e SSH_AUTH_SOCK ${{inputs.image-tag}}
     shell: bash

@@ -20,12 +20,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: pvarki/ci@main
+      with:
+        dockerfile-name: <dockerfile name> (default: Dockerfile)
+        dockerfile-target: <target name> (mandatory)
+        image-tag: <image tag name> (mandatory)
+
 ```
 
 This does the following:
 
 - clones/checkout the code (action)
-- installs python (action)
-- installs poetry (action)
-- installs mypy pylint detect-secrets (pip)
-- runs [pre-commit/action](https://github.com/pre-commit/action)
+- Runs: 
+```
+eval "$(ssh-agent -s)" && export DOCKER_BUILDKIT=1 && docker build -f ${{inputs.dockerfile-name}} --ssh default --target ${{inputs.dockerfile-target}} -t ${{inputs.image-tag}} .
+```
+- Runs:
+```
+docker run --rm -v ${{ github.workspace }}:/app -v $SSH_AUTH_SOCK:$SSH_AUTH_SOCK -e SSH_AUTH_SOCK ${{inputs.image-tag}}
+```

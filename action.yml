@@ -10,7 +10,7 @@ runs:
   using: composite
   steps:
   - uses: actions/checkout@v3
-  - run: docker build --target ${{inputs.dockerfile-target}} -t ${{inputs.image-tag}} .
+  - run: eval "$(ssh-agent -s)" && export DOCKER_BUILDKIT=1 && docker build --target ${{inputs.dockerfile-target}} -t ${{inputs.image-tag}} .
     shell: bash
-  - run: docker run --rm ${{inputs.image-tag}}
+  - run: docker run --rm -v ${{ github.workspace }}:/app -v $SSH_AUTH_SOCK:$SSH_AUTH_SOCK -e SSH_AUTH_SOCK ${{inputs.image-tag}}
     shell: bash

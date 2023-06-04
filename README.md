@@ -30,5 +30,11 @@ jobs:
 This does the following:
 
 - clones/checkout the code (action)
-- Runs: 'eval "$(ssh-agent -s)" && export DOCKER_BUILDKIT=1 && docker build -f ${{inputs.dockerfile-name}} --ssh default --target ${{inputs.dockerfile-target}} -t ${{inputs.image-tag}} .'
-- Runs: 'docker run --rm -v ${{ github.workspace }}:/app -v $SSH_AUTH_SOCK:$SSH_AUTH_SOCK -e SSH_AUTH_SOCK ${{inputs.image-tag}}'
+- Runs: 
+```
+eval "$(ssh-agent -s)" && export DOCKER_BUILDKIT=1 && docker build -f ${{inputs.dockerfile-name}} --ssh default --target ${{inputs.dockerfile-target}} -t ${{inputs.image-tag}} .
+```
+- Runs:
+```
+docker run --rm -v ${{ github.workspace }}:/app -v $SSH_AUTH_SOCK:$SSH_AUTH_SOCK -e SSH_AUTH_SOCK ${{inputs.image-tag}}
+```
